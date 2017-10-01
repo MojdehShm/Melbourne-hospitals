@@ -1,0 +1,16 @@
+
+IncomeDist<-read.csv('data/SA2Income.csv')
+IncomeDistLong<-gather(IncomeDist,Income,Persons,L42,L104,Lmore,Total)
+#--------------------------
+Shape<-readRDS('GreaterMelbourneShape.rds')
+GMSA2<-unique<-(Shape@data$SA2_NAME11)
+IncomeDistLongGM<-filter(IncomeDistLong,SA2 %in%GMSA2)
+saveRDS(IncomeDistLongGM,'IncomesMel.rds')
+#---------------------------
+#Not finished, removing other hospitals outside Melbourne
+Hospitals<-read.csv('data/HospitalLocations.csv')
+HospitalsGM<-filter(Hospitals,SA2 %in%GMSA2) postcode--->SA2 in Hospitals
+write.csv(HospitalsGM,'data/Hospitals.csv')
+#----------------------------
+** include age
+
